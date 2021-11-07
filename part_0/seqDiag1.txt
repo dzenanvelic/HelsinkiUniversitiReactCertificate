@@ -1,0 +1,31 @@
+seqDiag1 new_note
+
+
+1.BROWSER->SERVER: Request Method: POST, Request URL: https://studies.cs.helsinki.fi/exampleapp/new_note
+
+
+Server->BROWSER: note: DzenaNote1
+
+
+
+2.BROWSER->SERVER:equest Method: GET, Request URL: https://studies.cs.helsinki.fi/exampleapp/notes
+
+
+SERVER->BROWSER: :path: /exampleapp/notes
+
+
+
+3.BROWSER->SERVER: Request Method: GET,Request URL: https://studies.cs.helsinki.fi/exampleapp/main.css
+
+
+SERVER->BROWSER: content-type: text/css; charset=UTF-8,:path: /exampleapp/main.css
+
+4.BROWSER->SERVER: textRequest Method: GET, Request URL: https://studies.cs.helsinki.fi/exampleapp/main.js
+
+SERVER->BROWSER: content-type: application/javascript; charset=UTF-8, :path: /exampleapp/main.js
+
+
+5.BROWSER -> SERVER: Request Method: GET, Request URL: https://studies.cs.helsinki.fi/exampleapp/data.json
+
+
+SERVER->BROWSER: content-type: application/json; charset=utf-8, path: /exampleapp/data.json

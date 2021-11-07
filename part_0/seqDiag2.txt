@@ -1,0 +1,9 @@
+seqDiag2 Notes -- single page app
+
+
+1.BROWSER->SERVER: Request Method: POST, Request URL: https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+
+
+Server->BROWSER: content-type: application/json; charset=utf-8,{content: "DzenaNote2", date: "2021-11-07T21:11:31.398Z"}
+content: "DzenaNote2"
+date: "2021-11-07T21:11:31.398Z"
