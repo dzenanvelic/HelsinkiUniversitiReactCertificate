@@ -1,0 +1,30 @@
+going to  spa
+
+
+1.BROWSER->SERVER: Request Method: POST, Request URL: https://studies.cs.helsinki.fi/exampleapp/spa
+
+
+Server->BROWSER: content-type: text/html; charset=utf-8,path: /exampleapp/spa
+
+
+
+2.BROWSER->SERVER:equest Method: GET, Request URL: https://studies.cs.helsinki.fi/exampleapp/main.css
+
+
+SERVER->BROWSER: content-type: text/css; charset=UTF-8,:path: /exampleapp/main.css
+
+
+
+3.BROWSER->SERVER:Request Method: GET, Request URL: https://studies.cs.helsinki.fi/exampleapp/spa.js
+
+
+SERVER->BROWSER: content-type: application/javascript; charset=UTF-8,:path: /exampleapp/spa.js
+
+4.BROWSER->SERVER: textRequest Method: GET, Request URL: https://studies.cs.helsinki.fi/exampleapp/data.json
+
+SERVER->BROWSER: content-type: application/json; charset=utf-8,path: /exampleapp/data.json
+
+
+
+
+

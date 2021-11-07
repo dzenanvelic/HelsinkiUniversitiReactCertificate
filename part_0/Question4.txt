@@ -1,4 +1,4 @@
-seqDiag1 new_note
+going to  new_note
 
 
 1.BROWSER->SERVER: Request Method: POST, Request URL: https://studies.cs.helsinki.fi/exampleapp/new_note
