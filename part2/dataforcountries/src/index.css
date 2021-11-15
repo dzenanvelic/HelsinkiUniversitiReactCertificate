@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+.mainApp {
+  padding: 40px 40px;
+}
+.filterDiv input {
+  padding: 5px;
+}
+.flag {
+  width: 100px;
+  height: 60px;
+  object-fit: cover;
+  margin-top: 20px;
+}
+.countriesUnderTen {
+  display: flex;
+  align-items: center;
+}
+.countriesUnderTen button {
+  margin-left: 15px;
+  background-color: teal;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 4px 8px;
+  transition: all 0.7s ease-in-out;
+}
+.countriesUnderTen button:hover {
+  background-color: lightgreen;
+  color: black;
+}
+.weatherImage {
+  background-color: #222;
+  border-radius: 10px;
+}
