@@ -1,14 +1,17 @@
 import React, { useState } from 'react'
-
+import { useHistory, useParams } from 'react-router'
+import {BrowserRouter as Router,Switch,Route,Link} from 'react-router-dom'
+import { useField } from './hooks'
 const Menu = () => {
   const padding = {
     paddingRight: 5
   }
+  
   return (
     <div>
-      <a href='#' style={padding}>anecdotes</a>
-      <a href='#' style={padding}>create new</a>
-      <a href='#' style={padding}>about</a>
+      <Link to="/" style={padding}>anecdotes</Link>
+      <a href='/create' style={padding}>create new</a>
+      <a href='/about' style={padding}>about</a>
     </div>
   )
 }
@@ -17,10 +20,23 @@ const AnecdoteList = ({ anecdotes }) => (
   <div>
     <h2>Anecdotes</h2>
     <ul>
-      {anecdotes.map(anecdote => <li key={anecdote.id} >{anecdote.content}</li>)}
+      {anecdotes.map(anecdote => <li  key={anecdote.id} >{<Link to={`/${anecdote.id}`}>{anecdote.content}</Link>}</li>)}
     </ul>
   </div>
 )
+const Anecdote =({anecdotes})=>{
+  const id = useParams().id
+  const anecdote = anecdotes.filter(a=>a.id === id)
+  //console.log("anecdote",anecdote)
+ return( <div>
+    <h2>Anecdote</h2>
+    <h2>{anecdote[0]?.content}</h2>
+    <p>votes: {anecdote[0]?.votes}</p>
+    <p>for more info see: <a href={anecdote[0]?.info} target="_blank" rel="noreferrer">{anecdote[0]?.info}</a></p>
+
+  </div>
+ )}
+
 
 const About = () => (
   <div>
@@ -45,45 +61,84 @@ const Footer = () => (
 )
 
 const CreateNew = (props) => {
-  const [content, setContent] = useState('')
+ 
+  /* const [content, setContent] = useState('')
   const [author, setAuthor] = useState('')
-  const [info, setInfo] = useState('')
-
-
+  const [info, setInfo] = useState('') */
+const history = useHistory()
+ 
+const anecdote = useField('text')
+const authorH = useField('text')
+const information = useField('text')
   const handleSubmit = (e) => {
     e.preventDefault()
     props.addNew({
-      content,
-      author,
-      info,
+      content:anecdote.value,
+      author:authorH.value,
+      info:information.value,
       votes: 0
     })
+  
+    history.push('/')
   }
-
+const handleReset=()=>{
+  anecdote.resetfields()
+  authorH.resetfields()
+  information.resetfields()
+}
   return (
     <div>
       <h2>create a new anecdote</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          content
-          <input name='content' value={content} onChange={(e) => setContent(e.target.value)} />
+          content 
+          <input name='content' 
+            value={anecdote.value} 
+           type={anecdote.type}
+           onChange={anecdote.onChange} />
         </div>
         <div>
           author
-          <input name='author' value={author} onChange={(e) => setAuthor(e.target.value)} />
+          <input name='author'  
+          value={authorH.value} 
+          type={authorH.type}
+          onChange={authorH.onChange} />
         </div>
         <div>
           url for more info
-          <input name='info' value={info} onChange={(e)=> setInfo(e.target.value)} />
+          <input name='info' 
+          value={information.value} 
+          type={information.type}
+          onChange={information.onChange}/>
         </div>
-        <button>create</button>
+        <button type="submit">create</button>
+        <button type="reset" onClick={handleReset}>reset</button>
       </form>
+     
     </div>
   )
 
 }
-
+const Notification =({notification})=>{
+   
+   const style = {
+    border: 'solid',
+    padding: 10,
+    borderWidth: 1
+  }
+  if(notification === null){
+    return null
+  }
+  return (
+    <div style={style} className="notification">
+{notification}
+    </div>
+  )
+  
+}
 const App = () => {
+  
+  const [notification, setNotification] = useState(null)
   const [anecdotes, setAnecdotes] = useState([
     {
       content: 'If it hurts, do it more often',
@@ -101,11 +156,16 @@ const App = () => {
     }
   ])
 
-  const [notification, setNotification] = useState('')
+  
 
   const addNew = (anecdote) => {
     anecdote.id = (Math.random() * 10000).toFixed(0)
     setAnecdotes(anecdotes.concat(anecdote))
+      setNotification(`a new anecdote "${anecdote.content}" just created`)
+    setTimeout(()=>{
+setNotification(null)
+    },10000)
+    
   }
 
   const anecdoteById = (id) =>
@@ -121,14 +181,37 @@ const App = () => {
 
     setAnecdotes(anecdotes.map(a => a.id === id ? voted : a))
   }
-
+  
   return (
     <div>
       <h1>Software anecdotes</h1>
+      <Router>
       <Menu />
-      <AnecdoteList anecdotes={anecdotes} />
-      <About />
-      <CreateNew addNew={addNew} />
+      <Switch>
+       
+       
+       
+
+      <Route path="/create">
+         <CreateNew addNew={addNew} />
+      </Route>
+      <Route  path="/about">
+        <About  />
+      </Route>
+       <Route exact path="/">
+          <Notification notification={notification}/>
+           <AnecdoteList anecdotes={anecdotes} />
+        </Route>
+       
+       <Route path="/:id">
+         
+           <Anecdote anecdotes={anecdotes} />
+        </Route>
+     
+     
+      
+      </Switch>
+      </Router>
       <Footer />
     </div>
   )
