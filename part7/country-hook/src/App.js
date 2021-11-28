@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState} from 'react'
 
 import { useCountry,useField } from './hooks'
 
@@ -11,23 +11,26 @@ import { useCountry,useField } from './hooks'
 const Country = ({ country }) => {
   
  if (!country) {
-      return null
+      return  <div>
+          please enter country name...
+            </div>
     }
 
-    if (country.length === 0) {
+    if (country.message === "Not Found" ) {
         return (
-            <div>
+           <div>
             not found...
             </div>
         )
     }
+    console.log("countrylength",country.length)
     const returnedCountry=country[0]
   return (
     <div>
-      <h3>{returnedCountry?.name} </h3>
-      <div>capital {returnedCountry?.capital} </div>
-      <div>population {returnedCountry?.population}</div> 
-      <img src={returnedCountry?.flag} height='100' alt={`flag of ${returnedCountry?.name}`}/>  
+      <h3>{returnedCountry.name} </h3>
+      <div>capital {returnedCountry.capital} </div>
+      <div>population {returnedCountry.population}</div> 
+      <img src={returnedCountry.flag} height='100' alt={`flag of ${returnedCountry.name}`}/>  
     </div>
   )
 }

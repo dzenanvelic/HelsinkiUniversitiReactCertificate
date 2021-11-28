@@ -9,7 +9,7 @@ export  const useCountry = (name) => {
    
       const singleCountry =async()=>{
          const response =  await axios.get(`https://restcountries.com/v2/name/${name}?fullText=true`)
-         console.log('country response',response)
+         console.log('country response',response.data)
             setCountry(response.data)
       }
       singleCountry()
